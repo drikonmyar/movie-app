@@ -1,7 +1,7 @@
 import MovieCard from "../components/MovieCard"
 import { useState } from "react"
 import "../css/Home.css"
-import { searchMovies, getPopularMovies } from "../services/api";
+import { searchMovies, getLatestActionMovies } from "../services/api";
 import { useEffect } from "react";
 
 function Home() {
@@ -14,7 +14,7 @@ function Home() {
     useEffect(() => {
         const loadPopularMovies = async () => {
             try {
-                const popularMovies = await getPopularMovies()
+                const popularMovies = await getLatestActionMovies()
                 setMovies(popularMovies);
             }
             catch (err) {
@@ -70,7 +70,7 @@ function Home() {
             <div className="loading">Loading...</div>
         ) : (
             <div className="movies-grid">
-                {movies.map(movie => (<MovieCard movie={movie} key={movie.id} />))}
+                {movies.map(movie => (<MovieCard movie={movie} key={movie.imdbID} />))}
             </div>
         )}
     </div>
